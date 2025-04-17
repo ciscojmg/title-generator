@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Generador de Títulos de Tareas ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6ee7b7, #3b82f6);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: pulse 4s infinite alternate;
+        }
+
+        .shape-1 {
+            width: 150px;
+            height: 150px;
+            background-color: #a7f3d0;
+            top: 10%;
+            left: 15%;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background-color: #60a5fa;
+            top: 60%;
+            right: 20%;
+        }
+
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            background-color: #fde68a;
+            bottom: 15%;
+            left: 40%;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 90%;
+            max-width: 768px;
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        select,
+        input[type="text"] {
+            width: calc(100% - 0.5rem);
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #2d3748;
+        }
+
+        select:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #64b5f6;
+            box-shadow: 0 0 0 0.2rem rgba(100, 181, 246, 0.25);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        button {
+            background-color: #4f46e5;
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button:hover {
+            background-color: #3730a3;
+            transform: scale(1.05);
+        }
+
+        #resultado-container {
+            background-color: #edf2f7;
+            padding: 1.25rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem; /* Reducimos un poco el margen inferior */
+            font-size: 1.125rem;
+            color: #2d3748;
+            word-break: break-word;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        #resultado {
+            margin: 0;
+        }
+
+        .copy-button-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .copy-button {
+            background-color: #64b5f6; /* Un tono de azul diferente */
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .copy-button:hover {
+            background-color: #4285f4; /* Un tono de azul más oscuro al hacer hover */
+            transform: scale(1.05);
+        }
+
+        .icon {
+            margin: 0;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.9;
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-400 to-blue-400 flex justify-center items-center min-h-screen">
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="container">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">✨ Generador de Títulos de Tareas ✨</h1>
+        <div class="mb-4 text-left">
+            <label for="categoria" class="block text-gray-700 text-sm font-bold mb-2">⚙️ Categoría:</label>
+            <select id="categoria" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="front">Front-end</option>
+                <option value="back">Back-end</option>
+                <option value="mobile">Mobile</option>
+                <option value="devops">DevOps</option>
+                <option value="testing">Testing</option>
+                <option value="documentacion">Documentación</option>
+            </select>
+        </div>
+        <div class="mb-4 text-left">
+            <label for="tipo" class="block text-gray-700 text-sm font-bold mb-2">🏷️ Tipo:</label>
+            <select id="tipo" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="bug">Bug</option>
+                <option value="fix">Fix</option>
+                <option value="feature">Feature</option>
+                <option value="task">Task</option>
+                <option value="refactor">Refactor</option>
+                <option value="performance">Performance</option>
+            </select>
+        </div>
+        <div class="mb-6 text-left">
+            <label for="titulo" class="block text-gray-700 text-sm font-bold mb-2">📝 Título de la Tarea:</label>
+            <input type="text" id="titulo" placeholder="Ingrese el título de la tarea" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="flex justify-center mb-6">
+            <button onclick="generarTitulo()" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105"><span class="text-xl">🚀</span></button>
+        </div>
+        <div id="resultado-container" class="bg-gray-100 border border-gray-300 rounded p-4 text-center mb-4">
+            <p id="resultado" class="text-lg text-gray-800"># XXXX [categoría] [tipo] título de la tarea</p>
+        </div>
+        <div class="copy-button-container">
+            <button onclick="copiarResultado()" class="copy-button"><span class="text-xl">📋</span></button>
+        </div>
+    </div>
+
+    <script>
+        function generarNumeroUnico(titulo) {
+            let hash = 0;
+            for (let i = 0; i < titulo.length; i++) {
+                hash = (hash << 5) - hash + titulo.charCodeAt(i);
+                hash |= 0; // Convert to 32bit integer
+            }
+            const numero = Math.abs(hash % 10000);
+            return numero.toString().padStart(4, '0');
+        }
+
+        function generarTitulo() {
+            const categoria = document.getElementById("categoria").value;
+            const tipo = document.getElementById("tipo").value;
+            const titulo = document.getElementById("titulo").value.trim();
+            const numeroUnico = generarNumeroUnico(titulo);
+
+            if (titulo) {
+                const resultado = `# ${numeroUnico} [${categoria}] [${tipo}] ${titulo}`;
+                document.getElementById("resultado").textContent = resultado;
+            } else {
+                document.getElementById("resultado").textContent = "# XXXX [categoría] [tipo] Ingrese un título";
+            }
+        }
+
+        function copiarResultado() {
+            const resultadoTexto = document.getElementById("resultado").textContent;
+            navigator.clipboard.writeText(resultadoTexto)
+                .then(() => {
+                    alert("¡Título copiado al portapapeles! ✅");
+                })
+                .catch(err => {
+                    console.error('Error al copiar al portapapeles:', err);
+                    alert("No se pudo copiar al portapapeles. ❌");
+                });
+        }
+    </script>
+</body>
+</html>
